@@ -1,5 +1,8 @@
+import os
+
+# список плейлистов
 files = [
-    "source/playlist1.m3u"
+    "playlist1.m3u"
 ]
 
 result = []
@@ -9,6 +12,9 @@ for file in files:
         for line in f:
             if line.startswith("#EXTINF") or line.startswith("http"):
                 result.append(line)
+
+# создать папку output, если её нет
+os.makedirs("output", exist_ok=True)
 
 with open("output/final.m3u", "w", encoding="utf-8") as out:
     out.write("#EXTM3U\n")
